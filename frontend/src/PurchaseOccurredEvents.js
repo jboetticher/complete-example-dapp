@@ -1,6 +1,6 @@
 import { useLogs, useBlockNumber } from '@usedapp/core';
 import { utils } from 'ethers';
-import { Grid } from '@mui/material';
+import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
 export function PurchaseOccurredEvents({ contract }) {
   // Get block number to ensure that the useLogs doesn't search from 0, otherwise it will time out
@@ -11,18 +11,26 @@ export function PurchaseOccurredEvents({ contract }) {
   const logs = useLogs(filter, { fromBlock: blockNumber - 10000 });
   const parsedLogs = logs?.value.slice(-5).map(log => log.data);
 
-  console.log("logs", logs);
-
   return (
-    <Grid item xs={12}>
-      <h2>Recent PurchaseOccurred events:</h2>
-      <ul>
-        {parsedLogs?.map((log, index) => (
-          <li key={index}>
-            Minter: {log.minter}, Amount: {utils.formatEther(log.amount)} tokens
-          </li>
-        ))}
-      </ul>
+    <Grid item xs={12} marginTop={5}>
+      <TableContainer >
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Minter</TableCell>
+              <TableCell align="right">Amount</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {parsedLogs?.reverse().map((log, index) => (
+              <TableRow key={index}>
+                <TableCell>{log.minter}</TableCell>
+                <TableCell align="right">{utils.formatEther(log.amount)} tokens</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Grid>
   );
 }
