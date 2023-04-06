@@ -6,6 +6,7 @@ import { DAppProvider, MoonbaseAlpha } from '@usedapp/core';
 import { getDefaultProvider } from 'ethers';
 
 const config = {
+  readOnlyChainId: MoonbaseAlpha.chainId,
   readOnlyUrls: {
     [MoonbaseAlpha.chainId]: getDefaultProvider("https://rpc.api.moonbase.moonbeam.network"),
   },

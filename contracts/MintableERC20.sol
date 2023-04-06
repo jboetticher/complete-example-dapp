@@ -8,7 +8,7 @@ contract MintableERC20 is ERC20, Ownable {
     constructor() ERC20("Mintable ERC 20", "MERC") {}
 
     uint256 public constant MAX_TO_MINT = 1000 ether;
-    uint256 public constant NATIVE_TO_TOKEN = 1 ether;
+    uint256 public constant NATIVE_TO_TOKEN = 1;
 
     event PurchaseOccurred(address minter, uint256 amount);
     error MustMintOverZero();
