@@ -46,7 +46,7 @@ function App() {
             <TextField
               type="number"
               onChange={(e) => setValue(e.target.value)}
-              label="Enter value in ETH"
+              label="Enter value in DEV"
               variant="outlined"
               fullWidth
               style={{ marginBottom: '16px' }}
