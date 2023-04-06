@@ -5,7 +5,7 @@ import MintableERC20 from './MintableERC20.json';
 import { Button, Grid, TextField, CircularProgress } from '@mui/material';
 import { Box } from '@mui/system';
 
-const contractAddress = "0x0394c0EdFcCA370B20622721985B577850B0eb75"; // Replace with your contract address
+const contractAddress = "0xeE81E9A6540ceE75496eDb37fA4393c5958783b8"; // Replace with your contract address
 
 function App() {
   const { activateBrowserWallet, deactivate, account } = useEthers();

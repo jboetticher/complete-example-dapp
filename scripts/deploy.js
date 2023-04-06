@@ -1,7 +1,7 @@
 const hre = require("hardhat");
 
 async function main() {
-  const MintableERC20 = await hre.ethers.getContractFactory("Lock");
+  const MintableERC20 = await hre.ethers.getContractFactory("MintableERC20");
   const token = await MintableERC20.deploy();
 
   await token.deployed();
