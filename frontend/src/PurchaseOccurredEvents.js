@@ -2,7 +2,7 @@ import { useLogs, useBlockNumber } from '@usedapp/core';
 import { utils } from 'ethers';
 import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
-export function PurchaseOccurredEvents({ contract }) {
+export default function PurchaseOccurredEvents({ contract }) {
   // Get block number to ensure that the useLogs doesn't search from 0, otherwise it will time out
   const blockNumber = useBlockNumber();
   const filter = { args: [null, null], contract, event: "PurchaseOccurred" };

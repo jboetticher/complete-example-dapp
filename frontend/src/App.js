@@ -1,28 +1,23 @@
-import { useState } from 'react';
-import { useEthers, useContractFunction } from '@usedapp/core';
-import { utils, Contract } from 'ethers';
+import { useEthers } from '@usedapp/core';
+import { Contract } from 'ethers';
 import MintableERC20 from './MintableERC20.json';
-import { Button, Grid, TextField, CircularProgress, Card } from '@mui/material';
+import { Button, Grid, Card } from '@mui/material';
 import { Box } from '@mui/system';
-import { PurchaseOccurredEvents } from './PurchaseOccurredEvents';
+import PurchaseOccurredEvents from './PurchaseOccurredEvents';
 import SupplyComponent from './SupplyComponent';
+import MintingComponent from './MintingComponent';
 
 const contractAddress = "0x41dC0b0B8fa9ad1Cd9d596032b71620F7c0a578b"; // Replace with your contract address
 
 function App() {
   const { activateBrowserWallet, deactivate, account } = useEthers();
-  const [value, setValue] = useState(0);
   const contract = new Contract(contractAddress, MintableERC20.abi);
-  const { state, send } = useContractFunction(contract, 'purchaseMint', { value });
 
   // Connecting to the wallet
   const handleWalletConnection = () => {
     if (account) deactivate();
     else activateBrowserWallet();
   };
-
-  // Mint transaction
-  const handlePurchaseMint = () => send({ value: utils.parseEther(value.toString()) });
 
   return (
     <Box
@@ -42,31 +37,7 @@ function App() {
         <Card sx={{ borderRadius: 4, padding: 4, maxWidth: '550px', width: '100%' }}>
           <h1 style={{ textAlign: 'center' }}>Mint Your Token!</h1>
           <SupplyComponent contract={contract} />
-          <Grid item xs={12}>
-            <TextField
-              type="number"
-              onChange={(e) => setValue(e.target.value)}
-              label="Enter value in DEV"
-              variant="outlined"
-              fullWidth
-              style={{ marginBottom: '16px' }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Button
-              variant="contained"
-              color="primary"
-              fullWidth
-              onClick={handlePurchaseMint}
-              disabled={state.status === 'Mining' || account == null}
-            >
-              {state.status === 'Mining' ? (
-                <CircularProgress size={24} style={{ marginLeft: '8px' }} />
-              ) : (
-                'Purchase Mint'
-              )}
-            </Button>
-          </Grid>
+          <MintingComponent contract={contract} />
           <PurchaseOccurredEvents contract={contract} />
         </Card>
       </Grid>
@@ -75,3 +46,4 @@ function App() {
 }
 
 export default App;
+
