@@ -2,7 +2,6 @@ require("@nomicfoundation/hardhat-toolbox");
 
 const { privateKey } = require('./secrets.json');
 
-/** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
   solidity: "0.8.17",
   networks: {
