@@ -6,7 +6,7 @@ import { utils } from "ethers";
 export default function MintingComponent({ contract }) {
   const [value, setValue] = useState(0);
   const { account } = useEthers();
-  const { state, send } = useContractFunction(contract, 'purchaseMint', { value });
+  const { state, send } = useContractFunction(contract, 'purchaseMint');
 
   // Mint transaction
   const handlePurchaseMint = () => send({ value: utils.parseEther(value.toString()) });
